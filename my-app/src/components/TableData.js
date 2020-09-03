@@ -52,6 +52,7 @@ class TableData extends Component {
                     };
                     employeeData.push(employee);
                 } 
+                console.log(employeeData);
                 this.setState({
                     employees: employeeData,
                 });
@@ -64,7 +65,6 @@ class TableData extends Component {
         this.sortAPI();
     }
     render() {
-        var employeeData = this.state.data;
         return (
           <Table>
               <thead>
@@ -77,7 +77,8 @@ class TableData extends Component {
                   </tr>
               </thead>
               <tbody>
-                  {employeeData.map(function(employee){
+                  {this.state.employees.length > 0 ? (
+                      this.state.employees.map(function(employee){
                       return (
                           <tr data-item={employee}>
                               <td data-title="first-name">{employee.first_name}</td>
@@ -87,7 +88,9 @@ class TableData extends Component {
                               <td data-title="postcode">{employee.postcode}</td>
                           </tr>
                       );
-                  })}
+                  })
+                  ):(<tr></tr>)
+                }
               </tbody>
           </Table>
         );
