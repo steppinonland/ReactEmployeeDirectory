@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Table from 'react-bootstrap/Table'
+import { MDBDataTable } from "mdbreact";
 import axios from "axios";
 // https://randomuser.me/api/?results=200&nat=us
 class TableData extends Component {
@@ -9,28 +9,37 @@ class TableData extends Component {
             employees: [],
             columns: [
                 {
-                    text: "First Name",
-                    dataField: "first_name",
-                    sort: true,
+                    label: "First Name",
+                    field: "first_name",
+                    sort: "asc",
+                    width: 100,
+
                 },
                 {
-                    text: "Last Name",
-                    dataField: "last_name",
-                    sort: true,
+                    label: "Last Name" ,
+                    field: "last_name",
+                    sort: "asc",
+                    width: 100,
+
                 },
                 {
-                    text: "Email",
-                    dataField: "email",
-                    sort: true,
+                    label: "Email",
+                    field: "email",
+                    sort: "asc",
+                    width: 100,
+
                 },
                 {
-                    text: "Phone",
-                    dataField: "phone"
+                    label: "Phone",
+                    field: "phone",
+                    sort: "asc",
+                    width: 100,
                 },
                 {
-                    text: "Postcode",
-                    dataField: "postcode",
-                    sort: true,
+                    label: "Postcode",
+                    field: "postcode",
+                    sort: "asc",
+                    width: 100,
                 },
             ]
         }
@@ -66,33 +75,10 @@ class TableData extends Component {
     }
     render() {
         return (
-          <Table>
-              <thead>
-                  <tr>
-                      <th onClick={e => this.onSort(e, 'first_name')}>First Name</th>
-                      <th onClick={e => this.onSort(e, 'last_name')}>Last Name</th>
-                      <th onClick={e => this.onSort(e, 'email')}>Email</th>
-                      <th>Phone Number</th>
-                      <th onClick={e => this.onSort(e, 'postcode')}>Postcode</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {this.state.employees.length > 0 ? (
-                      this.state.employees.map(function(employee){
-                      return (
-                          <tr data-item={employee}>
-                              <td data-title="first-name">{employee.first_name}</td>
-                              <td data-title="last-name">{employee.last_name}</td>
-                              <td data-title="email">{employee.email}</td>
-                              <td data-title="phone">{employee.phone}</td>
-                              <td data-title="postcode">{employee.postcode}</td>
-                          </tr>
-                      );
-                  })
-                  ):(<tr></tr>)
-                }
-              </tbody>
-          </Table>
+            <MDBDataTable hover
+				data={{ columns: this.state.columns, rows: this.state.employees }}
+				sorting="true"
+			/>
         );
     }
 }
